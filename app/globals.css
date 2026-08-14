@@ -3,6 +3,48 @@
 @theme {
   /* Bound to the self-hosted next/font family declared in app/layout.tsx. */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Clinical Blue/Green palette — see COLORS.md for the source reference.
+     Named tokens under @theme become Tailwind utilities automatically:
+     --color-accent -> bg-accent / text-accent / border-accent, and each
+     numbered shade -> bg-accent-100, bg-accent-700, etc. */
+  --color-bg: #f0f7f8;
+  --color-text: #1c2a2e;
+
+  --color-accent-100: #e5f1f5;
+  --color-accent-200: #c9e2ea;
+  --color-accent-300: #9dc9d8;
+  --color-accent-500: #2f7693;
+  --color-accent: #2f7693;
+  --color-accent-700: #1d4f63;
+  --color-accent-800: #163d4d;
+  --color-accent-900: #0f2b37;
+
+  --color-accent-2-100: #e6f3ec;
+  --color-accent-2-200: #c7e6d5;
+  --color-accent-2-300: #9dd3b7;
+  --color-accent-2-500: #3f9469;
+  --color-accent-2: #3f9469;
+  --color-accent-2-700: #276b48;
+  --color-accent-2-800: #1d5236;
+  --color-accent-2-900: #143a26;
+}
+
+/* Not a @theme token: a gradient is not a color Tailwind can turn into a
+   utility class, so this stays a plain custom property, applied on each
+   page via an arbitrary background-image value. Kept to the lightest two
+   shades of each accent — anything darker would cut into the contrast that
+   text sitting directly on the page background, rather than on a white
+   card, relies on. */
+:root {
+  --gradient-clinical: linear-gradient(
+    135deg,
+    var(--color-bg) 0%,
+    var(--color-accent-100) 35%,
+    var(--color-accent-200) 58%,
+    var(--color-accent-2-100) 82%,
+    var(--color-accent-2-200) 100%
+  );
 }
 
 @layer base {
@@ -32,4 +74,32 @@ textarea[aria-invalid='true'] {
 
 .pulse-blue {
   animation: pulseBlue 2s infinite;
+}
+
+/* Continuous sweep for the HeartbeatLine decorative accent. The dash
+   pattern's on/off period (400 = the path's full normalized length, see the
+   component) means sliding stroke-dashoffset by exactly one period brings
+   the pattern back into perfect alignment with the identical geometry it
+   started on — so the loop has no pause and no jump, unlike a
+   draw-in-then-reset animation. Most of the trace stays inked at all times;
+   only the 60-unit gap sweeps continuously across it, standing in for the
+   leading, not-yet-drawn edge. */
+.heartbeat-line path {
+  stroke-dasharray: 340 60;
+  animation: heartbeatSweep 2.2s linear infinite;
+}
+
+@keyframes heartbeatSweep {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heartbeat-line path {
+    animation: none;
+  }
 }

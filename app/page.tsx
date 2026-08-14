@@ -3,19 +3,15 @@
 import Link from 'next/link';
 import { ClipboardList, Activity, Building2, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { MedicalBackground } from '@/src/components/MedicalBackground';
+import { HeartbeatLine } from '@/src/components/HeartbeatLine';
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden flex flex-col items-center justify-center px-4 py-12 font-sans">
-      {/* Background Decorations */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-blue-50/50 blur-3xl" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-blue-50/50 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03]" 
-             style={{ backgroundImage: 'radial-gradient(#005eb8 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
-      </div>
+    <div className="relative min-h-screen bg-[image:var(--gradient-clinical)] overflow-hidden flex flex-col items-center justify-center px-4 py-12 font-sans">
+      <MedicalBackground />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -32,9 +28,11 @@ export default function Home() {
           </div>
         </div>
 
-        <p className="text-[#5c6f8a] text-base md:text-lg mb-10 text-center max-w-md font-medium">
+        <p className="text-[#5c6f8a] text-base md:text-lg mb-6 text-center max-w-md font-medium">
           Welcome to our digital health platform. Please select a portal to continue.
         </p>
+
+        <HeartbeatLine className="w-44 h-9 text-[var(--color-accent)]/40 mb-10" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl px-4">
           {/* Patient Information Form */}

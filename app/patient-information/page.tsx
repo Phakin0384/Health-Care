@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef } from 'react';
 import { RegistrationForm, IntakeProgressUpdate } from '@/src/components/RegistrationForm';
 import { IntakeReceipt, PatientRegistrationFormData } from '@/src/types';
 import type { ActionResponse, IntakeAction } from '@/src/actions';
+import { MedicalBackground } from '@/src/components/MedicalBackground';
+import { HeartbeatLine } from '@/src/components/HeartbeatLine';
 
 const TOKEN_KEY = 'intakeClientToken';
 
@@ -140,7 +142,9 @@ export default function PatientInformationPage() {
   }, [ensureToken]);
 
   return (
-    <div className="min-h-screen bg-[#f7f9fb] text-[#191c1e] flex flex-col items-center px-4 py-10 font-sans">
+    <div className="relative min-h-screen bg-[image:var(--gradient-clinical)] text-[#191c1e] flex flex-col items-center px-4 py-10 font-sans overflow-hidden">
+      <MedicalBackground />
+      <HeartbeatLine className="w-40 h-8 text-[var(--color-accent)]/35 mb-6" />
       <RegistrationForm
         onRegisterSubmit={handleRegisterSubmit}
         onProgressChange={handleProgressChange}
