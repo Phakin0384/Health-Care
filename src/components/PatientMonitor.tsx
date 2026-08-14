@@ -27,7 +27,6 @@ interface PatientMonitorProps {
   onAddNewLiveSession: () => void;
   isSimulating: boolean;
   onToggleSimulation: () => void;
-  searchQuery?: string;
 }
 
 // Sessions are rendered straight from server state. The server owns progress
@@ -40,7 +39,6 @@ export const PatientMonitor: React.FC<PatientMonitorProps> = ({
   onAddNewLiveSession,
   isSimulating,
   onToggleSimulation,
-  searchQuery = '',
 }) => {
   const [filterStatus, setFilterStatus] = useState<SessionStatus | 'All'>('All');
 
@@ -51,12 +49,7 @@ export const PatientMonitor: React.FC<PatientMonitorProps> = ({
   const activeCount = sessions.filter((s) => s.status === 'Actively Filling').length;
   const inactiveCount = sessions.filter((s) => s.status === 'Inactive').length;
 
-  const normalizedSearch = searchQuery.trim().toLowerCase();
-  const filteredSessions = sessions.filter((s) => {
-    const matchesStatus = filterStatus === 'All' || s.status === filterStatus;
-    const searchable = [s.id, s.patientName, s.mrn, s.phone, s.dob].filter(Boolean).join(' ').toLowerCase();
-    return matchesStatus && (!normalizedSearch || searchable.includes(normalizedSearch));
-  });
+  const filteredSessions = sessions.filter((s) => filterStatus === 'All' || s.status === filterStatus);
 
   return (
     <div className="w-full max-w-[1280px] mx-auto mt-4 mb-16">
@@ -311,9 +304,7 @@ export const PatientMonitor: React.FC<PatientMonitorProps> = ({
 
       {filteredSessions.length === 0 && (
         <div className="text-center py-12 bg-white rounded-2xl border border-[#c2c6d4] mt-6">
-          <p className="text-[#727783] text-sm">
-            No intake sessions match {normalizedSearch ? `“${searchQuery.trim()}”` : 'the selected filter'}.
-          </p>
+          <p className="text-[#727783] text-sm">No intake sessions match the selected filter.</p>
           <button
             onClick={() => setFilterStatus('All')}
             className="mt-3 text-sm font-semibold text-[#00478d] underline cursor-pointer"

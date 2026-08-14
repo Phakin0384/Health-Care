@@ -2,11 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Bell, Info, Search, Siren } from 'lucide-react';
+import { Bell, Info, Siren } from 'lucide-react';
 
 interface HeaderProps {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
   unreadNotifications: number;
   onOpenNotifications: () => void;
   onOpenEmergency: () => void;
@@ -28,8 +26,6 @@ const initialsOf = (name: string) =>
     .join('');
 
 export const Header: React.FC<HeaderProps> = ({
-  searchQuery,
-  setSearchQuery,
   unreadNotifications,
   onOpenNotifications,
   onOpenEmergency,
@@ -44,18 +40,6 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="relative hidden md:block w-56 lg:w-64">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#727783]" />
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search patients..."
-            aria-label="Search patients by name, MRN, or session"
-            className="w-full pl-9 pr-4 py-1.5 bg-[#eceef0] text-[#191c1e] rounded-full text-sm border-none focus:ring-2 focus:ring-[#00478d] focus:outline-none placeholder-[#727783] transition-all"
-          />
-        </div>
-
         <button
           onClick={onOpenEmergency}
           aria-label="Broadcast emergency alert"

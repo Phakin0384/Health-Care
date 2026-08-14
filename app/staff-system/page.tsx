@@ -27,7 +27,6 @@ const EMPTY_STATE: AppState = {
 
 export default function StaffSystemPage() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('monitor');
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Real-time server state. Starts empty rather than seeded with sample data so
   // staff never see rows the server does not actually have; the connection
@@ -215,8 +214,6 @@ export default function StaffSystemPage() {
   return (
     <div className="min-h-screen bg-[#f7f9fb] text-[#191c1e] flex flex-col font-sans">
       <Header
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
         unreadNotifications={state.notifications.length}
         onOpenNotifications={() => setIsNotificationsOpen(true)}
         onOpenEmergency={() => setIsEmergencyOpen(true)}
@@ -278,7 +275,6 @@ export default function StaffSystemPage() {
             onAddNewLiveSession={() => dispatch({ type: 'SIMULATE_LIVE_SESSION' })}
             isSimulating={state.isSimulating}
             onToggleSimulation={() => dispatch({ type: 'TOGGLE_SIMULATION' })}
-            searchQuery={searchQuery}
           />
         )}
 
@@ -295,7 +291,6 @@ export default function StaffSystemPage() {
               dispatch({ type: 'SEND_PATIENT_MESSAGE', payload: { patientId, message } })
             }
             onBackToMonitor={() => setActiveTab('monitor')}
-            searchQuery={searchQuery}
           />
         )}
 

@@ -35,7 +35,6 @@ interface PatientRecordsProps {
   onSaveTriagePriority: (patientId: string, priority: string) => void;
   onSendMessage: (patientId: string, message: string) => void;
   onBackToMonitor?: () => void;
-  searchQuery?: string;
 }
 
 export const PatientRecords: React.FC<PatientRecordsProps> = ({
@@ -46,7 +45,6 @@ export const PatientRecords: React.FC<PatientRecordsProps> = ({
   onSaveTriagePriority,
   onSendMessage,
   onBackToMonitor,
-  searchQuery = '',
 }) => {
   // Exact id only. Falling back to a name match could quietly open a different
   // patient — the seeded data alone has both a Michael Chen and a Marcus Chen.
@@ -61,10 +59,7 @@ export const PatientRecords: React.FC<PatientRecordsProps> = ({
   const messageDialogRef = useModalDismiss(isMessageModalOpen, () => setIsMessageModalOpen(false));
   const triageDialogRef = useModalDismiss(isTriageModalOpen, () => setIsTriageModalOpen(false));
 
-  // The header search box applies here too. Previously this prop was accepted
-  // and ignored, so typing in the header did nothing on this tab while it
-  // filtered the monitor — the local box below is the override when both are set.
-  const effectiveSearch = (patientSearch || searchQuery).trim();
+  const effectiveSearch = patientSearch.trim();
   const needle = effectiveSearch.toLowerCase();
   const filteredPatients = records.filter(
     (p) =>

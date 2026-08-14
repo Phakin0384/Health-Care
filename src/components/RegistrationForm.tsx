@@ -56,8 +56,8 @@ const EMPTY_FORM: PatientRegistrationFormData = {
   phone: '',
   email: '',
   address: '',
-  language: 'English',
-  nationality: 'American',
+  language: '',
+  nationality: '',
   emergencyName: '',
   emergencyRel: '',
   emergencyPhone: '',
@@ -285,19 +285,19 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Field id="firstName" label="First Name" required error={validationErrors.firstName}>
                 {(props) => (
-                  <input {...props} name="firstName" type="text" placeholder="Jane" value={formData.firstName} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="firstName" type="text" placeholder="" value={formData.firstName} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="middleName" label="Middle Name">
                 {(props) => (
-                  <input {...props} name="middleName" type="text" placeholder="Marie" value={formData.middleName} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="middleName" type="text" placeholder="" value={formData.middleName} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="lastName" label="Last Name" required error={validationErrors.lastName}>
                 {(props) => (
-                  <input {...props} name="lastName" type="text" placeholder="Doe" value={formData.lastName} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="lastName" type="text" placeholder="" value={formData.lastName} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
             </div>
@@ -333,33 +333,33 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Field id="phone" label="Phone Number" required error={validationErrors.phone}>
                 {(props) => (
-                  <input {...props} name="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="phone" type="tel" placeholder="" value={formData.phone} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="email" label="Email Address" required error={validationErrors.email}>
                 {(props) => (
-                  <input {...props} name="email" type="email" placeholder="jane.doe@example.com" value={formData.email} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="email" type="email" placeholder="" value={formData.email} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
             </div>
 
             <Field id="address" label="Full Address" required error={validationErrors.address}>
               {(props) => (
-                <textarea {...props} name="address" rows={2} placeholder="123 Main St, Apt 4B, Springfield, IL" value={formData.address} onChange={handleChange} className={textareaClass} />
+                <textarea {...props} name="address" rows={2} placeholder="" value={formData.address} onChange={handleChange} className={textareaClass} />
               )}
             </Field>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Field id="language" label="Language">
                 {(props) => (
-                  <input {...props} name="language" type="text" placeholder="English" value={formData.language} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="language" type="text" placeholder="" value={formData.language} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="nationality" label="Nationality">
                 {(props) => (
-                  <input {...props} name="nationality" type="text" placeholder="e.g., American" value={formData.nationality} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="nationality" type="text" placeholder="" value={formData.nationality} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
             </div>
@@ -375,25 +375,25 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Field id="emergencyName" label="Emergency Contact Name (Optional)" error={validationErrors.emergencyName}>
                 {(props) => (
-                  <input {...props} name="emergencyName" type="text" placeholder="John Doe" value={formData.emergencyName} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="emergencyName" type="text" placeholder="" value={formData.emergencyName} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="emergencyRel" label="Relationship (Optional)" error={validationErrors.emergencyRel}>
                 {(props) => (
-                  <input {...props} name="emergencyRel" type="text" placeholder="Spouse / Parent" value={formData.emergencyRel} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="emergencyRel" type="text" placeholder="" value={formData.emergencyRel} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="emergencyPhone" label="Emergency Contact Phone (Optional)" error={validationErrors.emergencyPhone}>
                 {(props) => (
-                  <input {...props} name="emergencyPhone" type="tel" placeholder="(555) 987-6543" value={formData.emergencyPhone} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="emergencyPhone" type="tel" placeholder="" value={formData.emergencyPhone} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
 
               <Field id="religion" label="Religion (Optional)" hint="Used for care preferences.">
                 {(props) => (
-                  <input {...props} name="religion" type="text" placeholder="For care preferences" value={formData.religion} onChange={handleChange} className={inputClass} />
+                  <input {...props} name="religion" type="text" placeholder="" value={formData.religion} onChange={handleChange} className={inputClass} />
                 )}
               </Field>
             </div>
