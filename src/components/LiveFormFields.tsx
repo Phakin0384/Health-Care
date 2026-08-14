@@ -45,8 +45,10 @@ export const LiveFormFields: React.FC<LiveFormFieldsProps> = ({ draft, changedFi
 
   return (
     <div>
+      {/* Neutral heading: the same card is used for a form being typed into
+          and one already submitted, and "live" would only be true for one. */}
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[11px] font-bold uppercase tracking-wide text-[#727783]">Live form data</span>
+        <span className="text-[11px] font-bold uppercase tracking-wide text-[#727783]">Form data</span>
         <span className="text-[10px] font-mono text-[#727783]">{answered}/{FIELD_LABELS.length} fields</span>
       </div>
 

@@ -242,16 +242,32 @@ test('typing is tracked separately from the heartbeat', () => {
   assert.equal(session?.lastTypedAt, NOW, 'heartbeat must not count as typing');
 });
 
-test('submitting clears the live draft in favour of the stored record', () => {
+test('submitting replaces the in-progress draft with the validated answers', () => {
+  // The session keeps its answers after submission so the monitor can render
+  // every card the same way, but they are the final validated set — not
+  // whatever half-typed state the patient happened to be in.
   let state = createSeedState(NOW);
   state = apply(state, { type: 'START_INTAKE_SESSION', payload: { clientToken: 'tok' } }).state;
   state = apply(state, {
     type: 'UPDATE_INTAKE_PROGRESS',
-    payload: { clientToken: 'tok', progress: 50, currentModule: 'Contact Details', draft: { firstName: 'Michael' } },
+    payload: { clientToken: 'tok', progress: 50, currentModule: 'Contact Details', draft: { firstName: 'Mich' } },
   }).state;
 
   state = apply(state, { type: 'REGISTER_PATIENT', payload: { ...registration(), clientToken: 'tok' } }).state;
-  assert.equal(state.sessions.find((s) => s.clientToken === 'tok')?.draft, undefined);
+  const session = state.sessions.find((s) => s.clientToken === 'tok');
+
+  assert.equal(session?.draft?.firstName, 'Michael', 'half-typed value is superseded');
+  assert.equal(session?.draft?.email, 'm.chen@example.com');
+  // Editing state does not carry across a submission.
+  assert.equal(session?.lastChangedField, undefined);
+});
+
+test('every session carries a draft so the monitor renders one card layout', () => {
+  // A card that falls back to a different layout when the draft is missing
+  // makes the grid read as two kinds of card.
+  const state = createSeedState(NOW);
+  const missing = state.sessions.filter((s) => s.draft === undefined).map((s) => s.id);
+  assert.deepEqual(missing, [], 'seeded sessions without a draft');
 });
 
 test('the background tick ages real forms but never a simulated one', () => {

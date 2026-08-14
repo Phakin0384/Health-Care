@@ -264,10 +264,13 @@ export function reduce(state: ServerState, action: AppAction, now: number = Date
         phone: form.phone,
         mrn,
         recordId,
-        // Built fresh rather than spread from the in-progress session, so the
-        // live draft, its highlight, and the typing timestamp are all dropped:
-        // the stored record supersedes them, and an explicit `undefined` would
-        // not survive JSON round-tripping anyway.
+        // The session keeps the answers it collected, now the validated final
+        // set rather than the in-progress draft. A session is the record of an
+        // intake event, so it should still describe itself after submission —
+        // and it lets the monitor render every card the same way instead of
+        // degrading submitted ones to a stub. Built fresh rather than spread,
+        // so the edit highlight and typing timestamp are dropped.
+        draft: sanitizeRegistrationDraft(form),
       };
 
       const record: PatientRecord = {
@@ -670,6 +673,20 @@ export function createSeedState(now: number = Date.now()): ServerState {
         phone: '555-8831',
         mrn: '#984211-MC',
         recordId: 'michael-chen',
+        draft: {
+          firstName: 'Michael',
+          lastName: 'Chen',
+          dob: '1982-04-15',
+          gender: 'Male',
+          phone: '(555) 555-8831',
+          email: 'm.chen@example.com',
+          address: '742 Evergreen Terrace, Springfield',
+          language: 'English / Mandarin',
+          nationality: 'American',
+          emergencyName: 'Lisa Chen',
+          emergencyRel: 'Spouse',
+          emergencyPhone: '(555) 555-8832',
+        },
       },
       {
         id: '#8832',
@@ -682,6 +699,20 @@ export function createSeedState(now: number = Date.now()): ServerState {
         phone: '(555) 432-8812',
         mrn: '#984212-MC',
         recordId: 'marcus-chen',
+        draft: {
+          firstName: 'Marcus',
+          lastName: 'Chen',
+          dob: '1988-11-03',
+          gender: 'Male',
+          phone: '(555) 432-8812',
+          email: 'marcus.c@example.com',
+          address: '88 Oak Lane, Springfield',
+          language: 'English',
+          nationality: 'American',
+          emergencyName: 'David Chen',
+          emergencyRel: 'Brother',
+          emergencyPhone: '(555) 432-8813',
+        },
       },
       {
         id: '#8835',
@@ -701,6 +732,8 @@ export function createSeedState(now: number = Date.now()): ServerState {
         progress: 5,
         startedAt: minutes(20),
         lastActivityAt: minutes(15),
+        // Abandoned almost immediately — the empty fields are the point.
+        draft: {},
       },
       {
         id: '#8831',
@@ -709,6 +742,7 @@ export function createSeedState(now: number = Date.now()): ServerState {
         progress: 30,
         startedAt: minutes(18),
         lastActivityAt: minutes(15),
+        draft: { firstName: 'Sarah', lastName: 'Jenkins', gender: 'Female' },
       },
     ],
     patientRecords: [

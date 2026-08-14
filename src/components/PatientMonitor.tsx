@@ -11,7 +11,7 @@ import {
   Plus
 } from 'lucide-react';
 import { IntakeSession, SessionStatus } from '../types';
-import { formatDob, sessionAgeLabel } from '../formatTime';
+import { sessionAgeLabel } from '../formatTime';
 import { LiveFormFields } from './LiveFormFields';
 import { useNow } from '../useNow';
 
@@ -245,34 +245,17 @@ export const PatientMonitor: React.FC<PatientMonitorProps> = ({
                   )}
                 </div>
 
-                {/* While the form is open, mirror what the patient is
-                    actually typing. Once submitted the draft is cleared and
-                    the record holds the answers, so fall back to a summary. */}
-                {session.draft ? (
-                  <div className="bg-[#f7f9fb] border border-[#c2c6d4]/60 rounded-lg p-3">
-                    <LiveFormFields
-                      draft={session.draft}
-                      changedField={session.lastChangedField}
-                      isTyping={isTyping}
-                    />
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <span className="text-xs font-medium text-[#727783] block mb-1">DOB</span>
-                      <div className="text-xs text-[#424752] bg-[#f2f4f6] px-3 py-1.5 rounded-lg border border-[#c2c6d4]/50 min-h-[32px] flex items-center">
-                        {session.dob ? formatDob(session.dob) : <em className="text-[#727783]">not yet given</em>}
-                      </div>
-                    </div>
-
-                    <div>
-                      <span className="text-xs font-medium text-[#727783] block mb-1">Phone</span>
-                      <div className="text-xs text-[#424752] bg-[#f2f4f6] px-3 py-1.5 rounded-lg border border-[#c2c6d4]/50 min-h-[32px] flex items-center">
-                        {session.phone || '--'}
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {/* Every card renders the same field list whatever the
+                    session's state, so the grid reads as one uniform set of
+                    cards rather than two kinds. A session with no answers
+                    yet shows the same rows, empty. */}
+                <div className="bg-[#f7f9fb] border border-[#c2c6d4]/60 rounded-lg p-3">
+                  <LiveFormFields
+                    draft={session.draft ?? {}}
+                    changedField={session.lastChangedField}
+                    isTyping={isTyping}
+                  />
+                </div>
               </div>
 
               {/* Progress & Actions Footer */}
