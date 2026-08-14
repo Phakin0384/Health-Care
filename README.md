@@ -138,7 +138,7 @@ real-time sync. These went beyond that.
 ### Engineering practices
 
 Not features, but they are why the above is maintainable: strict TypeScript,
-ESLint, 34 unit tests, and a strict separation between I/O (`server.ts`) and
+ESLint, 35 unit tests, and a strict separation between I/O (`server.ts`) and
 decisions (`src/serverState.ts`, a pure reducer). See [DESIGN.md](./DESIGN.md).
 
 ## Important note
