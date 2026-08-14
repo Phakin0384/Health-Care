@@ -1,5 +1,19 @@
 # Health Care Intake System
 
+**Live app: https://health-care-intake.onrender.com**
+
+| | |
+|---|---|
+| Patient intake form | https://health-care-intake.onrender.com/patient-information |
+| Staff dashboard | https://health-care-intake.onrender.com/staff-system |
+
+Open the form and the dashboard side by side — on two devices, or two browser
+windows — and type into the form. Each field appears on the dashboard as it is
+entered, along with the patient's typing status.
+
+> Hosted on Render's free tier, which sleeps after ~15 minutes of inactivity.
+> The first request after a quiet period takes around 30 seconds to wake.
+
 A local demo of a patient intake form and real-time staff portal. Patients submit registration details while staff can monitor active sessions, review records, assign triage priority, maintain triage notes, and broadcast emergency alerts.
 
 ## Run locally
