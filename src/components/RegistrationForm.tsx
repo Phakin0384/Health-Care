@@ -103,9 +103,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   const draftLoadedRef = useRef(false);
   const skipDraftSaveRef = useRef(true);
 
-  // Mobile WebViews can recreate the page when a portal link opens or the
-  // development bundle refreshes. Keep the in-progress form in this tab so
-  // those lifecycle events do not erase what the patient has typed.
+  // A phone browser can discard and rebuild a backgrounded tab, and a dev
+  // bundle refresh reloads the page outright. Keep the in-progress form in
+  // this tab so neither erases what the patient has typed.
   useEffect(() => {
     try {
       const saved = sessionStorage.getItem(FORM_DRAFT_KEY);

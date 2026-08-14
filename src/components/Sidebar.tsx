@@ -76,9 +76,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Bottom Sidebar Action Items */}
       <div className="mt-auto space-y-2 pt-4 border-t border-[#c2c6d4]">
-        {/* Not target="_blank": the Expo Go wrapper sets
-            setSupportMultipleWindows={false}, so a new window is silently
-            dropped and the link does nothing on a phone. */}
+        {/* Deliberately not target="_blank", so the link behaves the same on a
+            tablet at the triage desk as on a desktop. */}
         <a
           href="/patient-information"
           className="w-full flex items-center gap-3 text-[#424752] px-4 py-2.5 hover:bg-[#e0e3e5] rounded-lg transition-colors text-sm font-medium cursor-pointer"

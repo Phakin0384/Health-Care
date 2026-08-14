@@ -9,9 +9,6 @@ coverage/
 .next/
 *.tsbuildinfo
 
-# Expo local device/dev state
-mobile/.expo/
-
 # Secrets. .env.example is committed as the template; real .env files are not.
 .env*
 !.env.example

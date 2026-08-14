@@ -42,9 +42,10 @@ export default function Home() {
             whileHover={{ y: -5 }}
             whileTap={{ scale: 0.98 }}
           >
-            {/* Not target="_blank": the Expo Go wrapper sets
-                setSupportMultipleWindows={false}, so opening a new window is
-                silently dropped and the card does nothing on a phone. */}
+            {/* Deliberately not target="_blank". An unannounced new tab is a
+                change of context the visitor did not ask for, and on a phone —
+                where these cards are most often tapped — a second tab shows
+                nothing a single tab would not. */}
             <Link
               href="/patient-information"
               className="group relative bg-white border border-blue-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:shadow-blue-100 transition-all duration-300 flex flex-col h-full overflow-hidden"

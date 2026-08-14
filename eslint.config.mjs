@@ -5,9 +5,8 @@ import typescript from 'eslint-config-next/typescript';
 // rather than wrapped in FlatCompat.
 const config = [
   {
-    // Build output and dependencies are not ours to lint. The Expo wrapper in
-    // mobile/ has its own toolchain and React Native rules.
-    ignores: ['.next/**', 'dist/**', 'node_modules/**', 'mobile/**', 'next-env.d.ts'],
+    // Build output and dependencies are not ours to lint.
+    ignores: ['.next/**', 'dist/**', 'node_modules/**', 'next-env.d.ts'],
   },
   ...coreWebVitals,
   ...typescript,

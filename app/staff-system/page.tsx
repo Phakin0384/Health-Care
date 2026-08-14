@@ -160,9 +160,12 @@ export default function StaffSystemPage() {
     };
   }, [fetchStateHttp]);
 
-  // Commands go over HTTP even when the socket is open: it is reliable in
-  // mobile WebViews where a WebSocket can report OPEN but not deliver. The
-  // socket remains responsible for live state broadcasts.
+  // Commands go over HTTP even when the socket is open. A send on a WebSocket
+  // is fire-and-forget — it can report OPEN and still not deliver through a
+  // flaky mobile connection or an intermediate proxy, with no way to tell. A
+  // POST either succeeds or returns an error this code can surface, and it
+  // carries server-assigned identifiers straight back to the caller that needs
+  // them. The socket stays responsible for live state broadcasts.
   const dispatch = useCallback(async (action: AppAction) => {
     try {
       const res = await fetch('/api/action', {

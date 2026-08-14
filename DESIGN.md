@@ -16,8 +16,8 @@ The layout separates **routes** (thin), **shared logic** (pure and tested), and
 Medical System/
 ├── server.ts                 Custom Node host: Express + Next.js + WebSocket server
 ├── Procfile                  Declares the web process for the host
+├── render.yaml               Deployment blueprint for the host
 ├── README.md / DESIGN.md     Setup and bonus features / this document
-├── mobile/                   Expo Go wrapper that loads the app over the LAN
 ├── app/                      Next.js App Router — routes only
 │   ├── layout.tsx            Root layout, self-hosted Inter via next/font
 │   ├── globals.css           Tailwind entry + design tokens
@@ -193,10 +193,11 @@ indicator decay on their own rather than freezing between broadcasts.
 
 Two directions, two mechanisms, deliberately:
 
-- **Client → server: HTTP `POST /api/action`.** A WebSocket can report `OPEN`
-  in a mobile WebView and still fail to deliver. A POST either succeeds or
-  returns an error the UI can act on, and it carries server-assigned
-  identifiers straight back to the caller that needs them.
+- **Client → server: HTTP `POST /api/action`.** A WebSocket send is
+  fire-and-forget: it can report `OPEN` and still not deliver through a flaky
+  mobile connection or an intermediate proxy, with nothing to detect it. A POST
+  either succeeds or returns an error the UI can act on, and it carries
+  server-assigned identifiers straight back to the caller that needs them.
 - **Server → all clients: WebSocket broadcast.** One authoritative push to
   every connected screen.
 

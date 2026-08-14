@@ -27,24 +27,16 @@ npm run dev
 
 Open `http://localhost:3000`. The landing page links to the patient form and staff portal.
 
-## Run on a phone with Expo Go
+### Testing it on a phone
 
-The `mobile/` folder contains an Expo Go wrapper for the web app. The computer and phone must be on the same Wi‑Fi network.
+Use the deployed URL above — it works in any mobile browser with no setup.
 
-```powershell
-# terminal 1 (project root)
-npm run dev
-
-# terminal 2
-cd mobile
-npm install
-$env:EXPO_PUBLIC_SERVER_URL="http://YOUR_COMPUTER_LAN_IP:3000"
-npx expo start
-```
-
-Scan the QR code with Expo Go. Use the computer's LAN IPv4 address from `ipconfig`; `localhost` will not work on the phone. If the phone cannot connect, allow Node.js/npm through the Windows firewall on private networks.
-
-Fonts and avatars are served by the app itself, so the portal renders correctly on a LAN with no internet access.
+To reach a local dev server from a phone instead, put both devices on the same
+Wi‑Fi and open `http://YOUR_COMPUTER_LAN_IP:3000` (the server binds `0.0.0.0`,
+so `localhost` will not work from the phone). Find the address with `ipconfig`
+on Windows or `ifconfig` on macOS, and allow Node.js through the firewall on
+private networks. Fonts and avatars are served by the app itself, so the portal
+renders correctly on a LAN with no internet access.
 
 ## Available commands
 
@@ -127,7 +119,7 @@ real-time sync. These went beyond that.
 
 - **Server-assigned identifiers.** The server owns session IDs and MRNs and returns them in the submission response, so the confirmation screen shows exactly what staff see — the patient can read their MRN down the phone and be found.
 - **Resumable sessions.** An opaque token in `sessionStorage` means a refresh, a retry, or a dropped connection resumes the same session instead of creating a duplicate row on the staff monitor.
-- **Draft recovery.** In-progress answers survive a tab reload or a mobile WebView reloading the page.
+- **Draft recovery.** In-progress answers survive a page reload, or a phone browser discarding and rebuilding a backgrounded tab.
 - **Honest failure.** If a submission fails, the form says so, keeps every answer, and offers a retry — it never shows a receipt for a record that was not created.
 
 ### Accessibility
@@ -140,7 +132,6 @@ real-time sync. These went beyond that.
 ### Reach and resilience
 
 - **Runs offline.** Fonts are self-hosted and avatars are rendered locally, so the portal works on a clinic LAN with no internet.
-- **Mobile app wrapper.** An Expo Go wrapper (`mobile/`) loads the app on a phone over the LAN.
 - **Survives a bad connection.** WebSocket reconnection with exponential backoff, HTTP polling fallback while the socket is down, ping/pong to drop dead connections, and a badge showing which path is live.
 - **Survives a restart.** State is written atomically and carries a schema version; an incompatible or damaged snapshot is rejected in favour of seed data rather than half-loaded.
 

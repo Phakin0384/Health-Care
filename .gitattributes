@@ -5,4 +5,3 @@
 
 # Lockfiles are generated; collapse them in diffs and reviews.
 package-lock.json linguist-generated=true
-mobile/package-lock.json linguist-generated=true
