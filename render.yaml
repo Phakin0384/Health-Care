@@ -1,0 +1,26 @@
+# Render Blueprint. Render reads this when the repo is deployed via
+# New → Blueprint, so the service is configured from the repo instead of by
+# hand in the dashboard.
+services:
+  - type: web
+    name: health-care-intake
+    runtime: node
+    plan: free
+    # Closest region to Thailand; change if the reviewers are elsewhere.
+    region: singapore
+    branch: main
+
+    # `--include=dev` is required, not optional. Render sets NODE_ENV=production,
+    # which makes npm skip devDependencies — and the build needs TypeScript,
+    # esbuild, and Tailwind from there. Without it the build fails at `next build`.
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+
+    # Cheap JSON endpoint. Render polls this to decide the service is live, and
+    # it exercises the real state path rather than a static file.
+    healthCheckPath: /api/state
+
+    envVars:
+      # PORT is injected by Render and read by server.ts — do not set it here.
+      - key: NODE_VERSION
+        value: "20"
