@@ -419,7 +419,7 @@ export const PatientRecords: React.FC<PatientRecordsProps> = ({
               rows={4}
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
-              placeholder="e.g. Hello Elena, please head to Room 104 for your vitals check."
+              placeholder={`Leave a message for ${currentRecord.name}...`}
               className="w-full bg-[#f7f9fb] border border-[#c2c6d4] rounded-xl p-3 text-sm focus:ring-2 focus:ring-[#00478d] focus:outline-none mb-4"
             />
 
