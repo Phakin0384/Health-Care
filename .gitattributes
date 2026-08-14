@@ -1,0 +1,8 @@
+# Normalise line endings to LF in the repository. Without this, committing from
+# Windows stores CRLF and every file reads as fully rewritten to anyone who
+# clones on Linux or macOS.
+* text=auto eol=lf
+
+# Lockfiles are generated; collapse them in diffs and reviews.
+package-lock.json linguist-generated=true
+mobile/package-lock.json linguist-generated=true

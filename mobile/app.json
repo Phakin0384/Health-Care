@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Health Care",
+    "slug": "health-care-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "permissions": [
+        "INTERNET"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+
+# Next.js build output and incremental type-check cache
+.next/
+*.tsbuildinfo
+
+# Expo local device/dev state
+mobile/.expo/
+
+# Secrets. .env.example is committed as the template; real .env files are not.
+.env*
+!.env.example
+
+# Runtime state snapshot written by the server
+data/*.json
