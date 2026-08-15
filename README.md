@@ -131,7 +131,7 @@ real-time sync. These went beyond that.
 
 ### Reach and resilience
 
-- **Runs offline.** Fonts are self-hosted and avatars are rendered locally, so the portal works on a clinic LAN with no internet.
+- **Runs offline.** Fonts are self-hosted and avatars are rendered locally, so the portal works on LAN with no internet.
 - **Survives a bad connection.** WebSocket reconnection with exponential backoff, HTTP polling fallback while the socket is down, ping/pong to drop dead connections, and a badge showing which path is live.
 - **Survives a restart.** State is written atomically and carries a schema version; an incompatible or damaged snapshot is rejected in favour of seed data rather than half-loaded.
 
