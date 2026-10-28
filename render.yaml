@@ -6,7 +6,7 @@ services:
     name: health-care-intake
     runtime: node
     plan: free
-    # Closest region to Thailand; change if the reviewers are elsewhere.
+    # Closest region to Thailand; change if your users are elsewhere.
     region: singapore
     branch: main
 

@@ -98,10 +98,10 @@ beyond that.
 - Emergency broadcasts are restricted to the code and location lists in `src/emergencyCodes.ts`, which the server enforces — the banner is shown on every connected screen until dismissed.
 - Destructive staff actions require confirmation. Clearing notifications does not erase the persistent activity log.
 
-## Bonus features
+## Features
 
-The brief asked for a patient intake form, a live staff view of it, and
-real-time sync. These went beyond that.
+At its core the app is a patient intake form, a live staff view of it, and
+real-time sync between the two. Around that core it adds the following.
 
 ### Extra screens and workflows
 

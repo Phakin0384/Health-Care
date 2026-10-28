@@ -17,7 +17,7 @@ Medical System/
 ├── server.ts                 Custom Node host: Express + Next.js + WebSocket server
 ├── Procfile                  Declares the web process for the host
 ├── render.yaml               Deployment blueprint for the host
-├── README.md / DESIGN.md     Setup and bonus features / this document
+├── README.md / DESIGN.md     Setup and features / this document
 ├── app/                      Next.js App Router — routes only
 │   ├── layout.tsx            Root layout, self-hosted Inter via next/font
 │   ├── globals.css           Tailwind entry + design tokens
@@ -53,7 +53,7 @@ reduce(state, action, now) → { state, result, changed }
 This split is the reason the rules are testable. MRN collisions between two
 patients with the same name, session-id reuse after a termination, form
 abandonment, and emergency-code rejection are all reachable from a unit test
-without starting a server or opening a socket. 34 tests run in about a second.
+without starting a server or opening a socket. 35 tests run in about a second.
 
 `src/` is imported by **both** the server and the browser. Validation, types,
 and the action union are defined once, so a payload the server would reject is
